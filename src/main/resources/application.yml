@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: boke
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/boke
+    username: cms
+    password: cms
+    driver-class-name: com.mysql.jdbc.Driver
+server:
+  port: 10001
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
