@@ -1,6 +1,7 @@
 package com.lijiawei.pro.boke.exception;
 
 import cn.hutool.core.util.StrUtil;
+import com.lijiawei.pro.boke.bean.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.util.StringUtils;
@@ -27,4 +28,11 @@ public class GlobalExceptionHandler {
         log.error(errorMsg);
         return errorMsg;
     }
+
+    @ExceptionHandler(Exception.class)
+    public Result global(Exception ex) {
+        log.error(ex.getMessage(),ex);
+        return Result.fail(-999,"程序运行时异常");
+    }
+
 }

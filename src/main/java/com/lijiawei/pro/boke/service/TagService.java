@@ -2,6 +2,7 @@ package com.lijiawei.pro.boke.service;
 
 import com.lijiawei.pro.boke.bean.entity.Tag;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lijiawei.pro.boke.bean.vo.HotTagVO;
 import com.lijiawei.pro.boke.bean.vo.TagVO;
 
 import java.util.List;
@@ -14,4 +15,6 @@ import java.util.List;
 public interface TagService extends IService<Tag> {
 
     List<TagVO> getTagListByArticleId(Long id);
+
+    List<HotTagVO> getHotTag(int limit);
 }

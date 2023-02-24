@@ -2,6 +2,7 @@ package com.lijiawei.pro.boke.mapper;
 
 import com.lijiawei.pro.boke.bean.entity.Tag;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lijiawei.pro.boke.bean.vo.HotTagVO;
 import com.lijiawei.pro.boke.bean.vo.TagVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,6 +17,8 @@ import java.util.List;
 public interface TagMapper extends BaseMapper<Tag> {
 
     List<TagVO> getTagByArticleId(@Param("article_id") Long id);
+
+    List<HotTagVO> getHottestTag(@Param("limit") int limit);
 }
 
 

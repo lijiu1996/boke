@@ -14,4 +14,6 @@ import java.util.List;
 public interface ArticleService extends IService<Article> {
 
     List<ArticleVO> getArticleByPage(int page, int pageSize);
+
+    List<Article> getHotArticles(int i);
 }

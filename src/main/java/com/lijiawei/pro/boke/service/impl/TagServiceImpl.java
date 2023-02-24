@@ -2,6 +2,7 @@ package com.lijiawei.pro.boke.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lijiawei.pro.boke.bean.entity.Tag;
+import com.lijiawei.pro.boke.bean.vo.HotTagVO;
 import com.lijiawei.pro.boke.bean.vo.TagVO;
 import com.lijiawei.pro.boke.service.TagService;
 import com.lijiawei.pro.boke.mapper.TagMapper;
@@ -24,6 +25,12 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag>
     public List<TagVO> getTagListByArticleId(Long id) {
         return baseMapper.getTagByArticleId(id);
     }
+
+    @Override
+    public List<HotTagVO> getHotTag(int limit) {
+        return baseMapper.getHottestTag(limit);
+    }
+
 }
 
 

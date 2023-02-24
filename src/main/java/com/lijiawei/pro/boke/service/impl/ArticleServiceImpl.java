@@ -1,11 +1,11 @@
 package com.lijiawei.pro.boke.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lijiawei.pro.boke.bean.entity.Article;
 import com.lijiawei.pro.boke.bean.entity.User;
 import com.lijiawei.pro.boke.bean.vo.ArticleVO;
-import com.lijiawei.pro.boke.bean.vo.TagVO;
 import com.lijiawei.pro.boke.service.ArticleService;
 import com.lijiawei.pro.boke.mapper.ArticleMapper;
 import com.lijiawei.pro.boke.service.TagService;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,6 +49,15 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
             return articleVO;
         }).collect(Collectors.toList());
         return articleList;
+    }
+
+    @Override
+    public List<Article> getHotArticles(int limit) {
+        LambdaQueryWrapper<Article> lqw = new LambdaQueryWrapper<>();
+        lqw.orderByDesc(Article::getReviewCount);
+        lqw.select(Article::getId,Article::getTitle);
+        lqw.last("limit" + limit);
+        return list(lqw);
     }
 }
 

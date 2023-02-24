@@ -20,4 +20,18 @@
         on l.tag_id = r.id
         where l.article_id = #{article_id}
     </select>
+    <select id="getHottestTag" resultType="com.lijiawei.pro.boke.bean.vo.HotTagVO">
+        SELECT tag_id as id,tag_name from
+                (select tag_id, COUNT(1) as count from t_article_tag GROUP BY tag_id) l
+                    INNER JOIN t_tag r
+                               on l.tag_id = r.id
+        ORDER BY count DESC
+            LIMIT #{limit}
+    </select>
+    <!--    <select id="getHottestTag" resultType="com.lijiawei.pro.boke.bean.vo.HotTagVO">-->
+<!--        SELECT max(count),tag_id as id,tag_name from-->
+<!--            (select tag_id, COUNT(1) as count from t_article_tag GROUP BY tag_id) l-->
+<!--            INNER JOIN t_tag r-->
+<!--            on l.tag_id = r.id-->
+<!--    </select>-->
 </mapper>
