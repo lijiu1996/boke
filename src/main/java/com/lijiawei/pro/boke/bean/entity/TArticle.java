@@ -1,9 +1,7 @@
 package com.lijiawei.pro.boke.bean.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -57,6 +55,11 @@ public class TArticle implements Serializable {
     private Integer categoryId;
 
     /**
+     * 是否置顶
+     */
+    private Integer weight;
+
+    /**
      * 数据创建时间
      */
     private Date createTime;
@@ -69,6 +72,7 @@ public class TArticle implements Serializable {
     /**
      * 数据删除标记 1-已删除，0-未删除
      */
+    @TableLogic
     private Integer isdeleted;
 
     @TableField(exist = false)

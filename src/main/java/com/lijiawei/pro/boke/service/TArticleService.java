@@ -2,6 +2,9 @@ package com.lijiawei.pro.boke.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lijiawei.pro.boke.bean.entity.TArticle;
+import com.lijiawei.pro.boke.bean.vo.ArticleVO;
+
+import java.util.List;
 
 /**
 * @author lijiawei
@@ -10,4 +13,5 @@ import com.lijiawei.pro.boke.bean.entity.TArticle;
 */
 public interface TArticleService extends IService<TArticle> {
 
+    List<ArticleVO> getArticleByPage(int page, int pageSize);
 }

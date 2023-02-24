@@ -4,6 +4,7 @@ import com.lijiawei.pro.boke.constant.ResultEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Li JiaWei
@@ -12,7 +13,7 @@ import lombok.Data;
  * @Date: 2023/2/23 16:48
  * @Version: 1.0
  */
-@Builder
+@NoArgsConstructor
 @Data
 public class Result<T> {
 
@@ -20,13 +21,17 @@ public class Result<T> {
     private int code;
     private String msg;
     private T data;
-
-    public static <T> Result ok(ResultEnum res, T data) {
-        return Result.builder()
-                .success(res.isSuccess())
-                .code(res.getCode())
-                .msg(res.getMsg())
-                .data(data)
-                .build();
+    private Result(ResultEnum resultEnum) {
+        this.success = resultEnum.isSuccess();
+        this.code = resultEnum.getCode();
+        this.msg = resultEnum.getMsg();
     }
+    public Result<T> data(T data) {
+        this.data = data;
+        return this;
+    }
+    public static Result ok() {
+        return new Result(ResultEnum.OK);
+    }
+
 }
