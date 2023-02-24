@@ -14,7 +14,7 @@ import lombok.Data;
  */
 @TableName(value ="t_user")
 @Data
-public class TUser implements Serializable {
+public class User implements Serializable {
     /**
      * 主键
      */

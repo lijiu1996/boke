@@ -9,11 +9,11 @@ import lombok.Data;
 
 /**
  * 
- * @TableName t_article_tag
+ * @TableName t_tag
  */
-@TableName(value ="t_article_tag")
+@TableName(value ="t_tag")
 @Data
-public class TArticleTag implements Serializable {
+public class Tag implements Serializable {
     /**
      * 
      */
@@ -21,14 +21,14 @@ public class TArticleTag implements Serializable {
     private Long id;
 
     /**
-     * 文章id
+     * 标签名称
      */
-    private Long articleId;
+    private String tagName;
 
     /**
-     * 类型id
+     * 标签图片路径
      */
-    private Long tagId;
+    private String avartar;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
