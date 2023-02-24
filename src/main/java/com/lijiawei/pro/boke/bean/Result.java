@@ -26,12 +26,23 @@ public class Result<T> {
         this.code = resultEnum.getCode();
         this.msg = resultEnum.getMsg();
     }
+
+    private Result(boolean success, int code, String msg) {
+        this.success = success;
+        this.code = code;
+        this.msg = msg;
+    }
+
     public Result<T> data(T data) {
         this.data = data;
         return this;
     }
     public static Result ok() {
         return new Result(ResultEnum.OK);
+    }
+
+    public static Result fail(int code, String msg) {
+        return new Result(false,code,msg);
     }
 
 }

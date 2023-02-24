@@ -1,14 +1,18 @@
 package com.lijiawei.pro.boke.controller;
 
 import com.lijiawei.pro.boke.bean.Result;
+import com.lijiawei.pro.boke.bean.request.ArticleRequest;
 import com.lijiawei.pro.boke.bean.vo.ArticleVO;
 import com.lijiawei.pro.boke.service.TArticleService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Null;
 import java.util.List;
 
 /**
@@ -25,8 +29,8 @@ public class MainPageController {
     private TArticleService tArticleService;
 
     @PostMapping("/articles")
-    private Result getArticleList(@Min(1) Integer page,@Min(1) int pageSize) {
-        List<ArticleVO> articles = tArticleService.getArticleByPage(page,pageSize);
+    private Result getArticleList(@Valid @RequestBody ArticleRequest articleRequest) {
+        List<ArticleVO> articles = tArticleService.getArticleByPage(articleRequest.getPage(),articleRequest.getPageSize());
         return Result.ok().data(articles);
     }
 

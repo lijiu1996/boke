@@ -3,8 +3,8 @@ spring:
     name: boke
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/boke
-    username: cms
-    password: cms
+    username: root
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
 server:
   port: 10001
