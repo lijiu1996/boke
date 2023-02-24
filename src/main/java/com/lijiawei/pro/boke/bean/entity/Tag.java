@@ -28,7 +28,7 @@ public class Tag implements Serializable {
     /**
      * 标签图片路径
      */
-    private String avartar;
+    private String avatar;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

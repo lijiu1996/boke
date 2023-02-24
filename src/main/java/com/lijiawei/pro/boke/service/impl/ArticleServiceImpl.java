@@ -3,11 +3,13 @@ package com.lijiawei.pro.boke.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lijiawei.pro.boke.bean.entity.Article;
+import com.lijiawei.pro.boke.bean.entity.User;
 import com.lijiawei.pro.boke.bean.vo.ArticleVO;
 import com.lijiawei.pro.boke.bean.vo.TagVO;
 import com.lijiawei.pro.boke.service.ArticleService;
 import com.lijiawei.pro.boke.mapper.ArticleMapper;
 import com.lijiawei.pro.boke.service.TagService;
+import com.lijiawei.pro.boke.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -29,6 +31,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
     @Resource
     private TagService tagService;
 
+    @Resource
+    private UserService userService;
+
     @Override
     public List<ArticleVO> getArticleByPage(int page, int pageSize) {
         Page<Article> pageRes = this.page(new Page<>(page, pageSize));
@@ -38,7 +43,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
         List<ArticleVO> articleList = pageRes.getRecords().stream().map(article -> {
             ArticleVO articleVO = new ArticleVO();
             BeanUtils.copyProperties(article,articleVO);
-            articleVO.setAuthor(String.valueOf(article.getAuthorId()));
+            User user = userService.getById(article.getAuthorId());
+            articleVO.setAuthor(user != null ? user.getUserAccount() : "未知");
             articleVO.setCategorys(String.valueOf(article.getCategoryId()));
             articleVO.setTags(tagService.getTagListByArticleId(article.getId()));
             return articleVO;

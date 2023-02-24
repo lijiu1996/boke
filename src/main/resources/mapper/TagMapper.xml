@@ -7,14 +7,14 @@
     <resultMap id="BaseResultMap" type="com.lijiawei.pro.boke.bean.entity.Tag">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="tagName" column="tag_name" jdbcType="VARCHAR"/>
-            <result property="avartar" column="avartar" jdbcType="VARCHAR"/>
+            <result property="avatar" column="avartar" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,tag_name,avartar
     </sql>
     <select id="getTagByArticleId" resultType="com.lijiawei.pro.boke.bean.vo.TagVO">
-        select tag_id, tag_name, avatar
+        select tag_id as id , tag_name, avatar
         from t_article_tag l
         inner join t_tag r
         on l.tag_id = r.id
