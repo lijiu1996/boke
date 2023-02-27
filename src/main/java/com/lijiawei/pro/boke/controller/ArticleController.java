@@ -27,6 +27,7 @@ public class ArticleController {
 
     /**
      * 首页文章列表
+     *  攻克困难 -- 写mybatis做关联查询
      * @param articleRequest
      * @return
      */
@@ -38,6 +39,8 @@ public class ArticleController {
 
     /**
      * 最热文章
+     *  攻克困难 -- MybatisPlus查询时只返回指定列(.select)
+     *  攻克困难 -- 如何配置全局Json格式
      */
     @PostMapping("/hot")
     private Result getHottestArticle() {

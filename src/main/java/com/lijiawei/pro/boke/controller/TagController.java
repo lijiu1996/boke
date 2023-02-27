@@ -19,6 +19,7 @@ public class TagController {
 
     /**
      * 统计最热门标签
+     *      攻克困难 -- 写mybatis做关联查询 实现select(max(count))
      * @return
      */
     @GetMapping("/hot")

@@ -56,7 +56,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
         LambdaQueryWrapper<Article> lqw = new LambdaQueryWrapper<>();
         lqw.orderByDesc(Article::getReviewCount);
         lqw.select(Article::getId,Article::getTitle);
-        lqw.last("limit" + limit);
+        lqw.last("limit " + limit);
         return list(lqw);
     }
 }
