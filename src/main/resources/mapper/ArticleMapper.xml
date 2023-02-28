@@ -24,4 +24,7 @@
         author_id,category_id,create_time,
         update_time,isdeleted
     </sql>
+    <select id="getArticleArchives" resultType="com.lijiawei.pro.boke.bean.vo.ArticleArchiveVO">
+        SELECT year(create_time) as year,month(create_time) as month,count(1) as count FROM t_article GROUP BY year,month
+    </select>
 </mapper>

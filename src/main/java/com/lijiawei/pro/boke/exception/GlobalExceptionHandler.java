@@ -2,37 +2,37 @@ package com.lijiawei.pro.boke.exception;
 
 import cn.hutool.core.util.StrUtil;
 import com.lijiawei.pro.boke.bean.Result;
+import com.lijiawei.pro.boke.constant.ResultEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.MethodParameter;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.lang.reflect.Executable;
 import java.lang.reflect.Method;
-import java.util.List;
 
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public String validExceptionHandler(MethodArgumentNotValidException exception) {
+    public Result validExceptionHandler(MethodArgumentNotValidException exception) {
         Method method = exception.getParameter().getMethod();
         FieldError error = exception.getFieldError();
         String errorMsg = StrUtil.format("方法'{}' 参数'{}'校验失败: '{}'{},实际传入{}",method.getName(),error.getObjectName(), error.getField(), error.getDefaultMessage(), error.getRejectedValue());
         log.error(errorMsg);
-        return errorMsg;
+        return Result.fail(ResultEnum.InvalidArgument).data(errorMsg);
+    }
+
+    @ExceptionHandler(WrongTokenException.class)
+    public Result wrongToken(WrongTokenException ex) {
+        return Result.fail(ResultEnum.NotLogin);
     }
 
     @ExceptionHandler(Exception.class)
     public Result global(Exception ex) {
         log.error(ex.getMessage(),ex);
-        return Result.fail(-999,"程序运行时异常");
+        return Result.fail(ResultEnum.Unknown);
     }
 
 }

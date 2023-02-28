@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lijiawei.pro.boke.bean.entity.Article;
 import com.lijiawei.pro.boke.bean.entity.User;
+import com.lijiawei.pro.boke.bean.vo.ArticleArchiveVO;
 import com.lijiawei.pro.boke.bean.vo.ArticleVO;
 import com.lijiawei.pro.boke.service.ArticleService;
 import com.lijiawei.pro.boke.mapper.ArticleMapper;
@@ -54,10 +55,24 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
     @Override
     public List<Article> getHotArticles(int limit) {
         LambdaQueryWrapper<Article> lqw = new LambdaQueryWrapper<>();
-        lqw.orderByDesc(Article::getReviewCount);
+        lqw.orderByDesc(Article::getViewCount);
         lqw.select(Article::getId,Article::getTitle);
         lqw.last("limit " + limit);
         return list(lqw);
+    }
+
+    @Override
+    public List<Article> getNewArticles(int limit) {
+        LambdaQueryWrapper<Article> lqw = new LambdaQueryWrapper<>();
+        lqw.orderByDesc(Article::getCreateTime);
+        lqw.select(Article::getId,Article::getTitle);
+        lqw.last("limit " + limit);
+        return list(lqw);
+    }
+
+    @Override
+    public List<ArticleArchiveVO> getArticleArchives() {
+        return baseMapper.getArticleArchives();
     }
 }
 

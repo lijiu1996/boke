@@ -2,6 +2,9 @@ package com.lijiawei.pro.boke.mapper;
 
 import com.lijiawei.pro.boke.bean.entity.Article;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lijiawei.pro.boke.bean.vo.ArticleArchiveVO;
+
+import java.util.List;
 
 /**
 * @author lijiawei
@@ -11,6 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface ArticleMapper extends BaseMapper<Article> {
 
+    List<ArticleArchiveVO> getArticleArchives();
 }
 
 

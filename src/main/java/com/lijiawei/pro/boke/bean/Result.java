@@ -45,4 +45,8 @@ public class Result<T> {
         return new Result(false,code,msg);
     }
 
+    public static Result fail(ResultEnum re) {
+        return new Result(re);
+    }
+
 }

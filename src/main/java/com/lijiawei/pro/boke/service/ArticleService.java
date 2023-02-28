@@ -2,6 +2,7 @@ package com.lijiawei.pro.boke.service;
 
 import com.lijiawei.pro.boke.bean.entity.Article;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lijiawei.pro.boke.bean.vo.ArticleArchiveVO;
 import com.lijiawei.pro.boke.bean.vo.ArticleVO;
 
 import java.util.List;
@@ -16,4 +17,8 @@ public interface ArticleService extends IService<Article> {
     List<ArticleVO> getArticleByPage(int page, int pageSize);
 
     List<Article> getHotArticles(int i);
+
+    List<Article> getNewArticles(int limit);
+
+    List<ArticleArchiveVO> getArticleArchives();
 }

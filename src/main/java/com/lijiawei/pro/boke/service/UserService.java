@@ -1,7 +1,9 @@
 package com.lijiawei.pro.boke.service;
 
-import com.lijiawei.pro.boke.bean.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lijiawei.pro.boke.bean.entity.User;
+import com.lijiawei.pro.boke.bean.request.RegisterRequest;
+import com.lijiawei.pro.boke.bean.vo.UserVO;
 
 /**
 * @author lijiawei
@@ -10,4 +12,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface UserService extends IService<User> {
 
+    boolean hasAccount(String account);
+
+    User saveRegisterRequest(RegisterRequest registerRequest);
+
+    User getByAccount(String account);
+
+    UserVO generateUserVO(User user);
 }

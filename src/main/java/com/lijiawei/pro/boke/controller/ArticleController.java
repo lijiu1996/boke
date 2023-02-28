@@ -3,6 +3,7 @@ package com.lijiawei.pro.boke.controller;
 import com.lijiawei.pro.boke.bean.Result;
 import com.lijiawei.pro.boke.bean.entity.Article;
 import com.lijiawei.pro.boke.bean.request.ArticleRequest;
+import com.lijiawei.pro.boke.bean.vo.ArticleArchiveVO;
 import com.lijiawei.pro.boke.bean.vo.ArticleVO;
 import com.lijiawei.pro.boke.service.ArticleService;
 import org.springframework.web.bind.annotation.*;
@@ -47,5 +48,23 @@ public class ArticleController {
         int limit = 2;
         List<Article> hotArticles = articleService.getHotArticles(limit);
         return Result.ok().data(hotArticles);
+    }
+
+    @PostMapping("/new")
+    private Result getNewestArticle() {
+        int limit = 2;
+        List<Article> newArticles = articleService.getNewArticles(limit);
+        return Result.ok().data(newArticles);
+    }
+
+    /**
+     * 文章归档功能
+     *      攻克困难 mysql时间函数运用
+     * @return
+     */
+    @PostMapping("/listArchives")
+    private Result getArchives() {
+        List<ArticleArchiveVO> archiveVOS = articleService.getArticleArchives();
+        return Result.ok().data(archiveVOS);
     }
 }
