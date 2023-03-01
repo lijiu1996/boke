@@ -2,6 +2,7 @@ package com.lijiawei.pro.boke.config;
 
 import com.lijiawei.pro.boke.ext.interceptor.AuthInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -15,18 +16,26 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     private AuthInterceptor authInterceptor;
+
+    @Value("${spring.profiles.active}")
+    private String profile;
     /**
      * Todo 加载拦截器
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authInterceptor)
-                .addPathPatterns("/users/currentUser")
-                .addPathPatterns("/logout")
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/login")
-//                .excludePathPatterns("/register")
-        ;
+
+        // 在生产环境和测试环境执行不同profile
+        if (profile.equals("prod")) {
+            registry.addInterceptor(authInterceptor)
+                    .addPathPatterns("/**")
+                    .excludePathPatterns("/login")
+                    .excludePathPatterns("/register");
+        } else {
+            registry.addInterceptor(authInterceptor)
+                    .addPathPatterns("/users/currentUser")
+                    .addPathPatterns("/logout");
+        }
     }
 
     /**

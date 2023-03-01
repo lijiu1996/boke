@@ -70,7 +70,8 @@ public class ArticleController {
 
     /**
      *  文档详情功能
-     *      攻克困难 如何在业务方法里返回异常捏
+     *      攻克困难 如何在业务方法里返回异常
+     *      困难2 抽象ArticleVO组装方法
      * @param id
      * @return
      */
