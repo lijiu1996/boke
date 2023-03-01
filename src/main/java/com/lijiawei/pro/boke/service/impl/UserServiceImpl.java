@@ -8,8 +8,6 @@ import com.lijiawei.pro.boke.bean.request.RegisterRequest;
 import com.lijiawei.pro.boke.bean.vo.UserVO;
 import com.lijiawei.pro.boke.mapper.UserMapper;
 import com.lijiawei.pro.boke.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -21,9 +19,6 @@ import org.springframework.util.DigestUtils;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     implements UserService{
-
-    @Autowired
-    private RedisTemplate redisTemplate;
 
     @Override
     public boolean hasAccount(String account) {
