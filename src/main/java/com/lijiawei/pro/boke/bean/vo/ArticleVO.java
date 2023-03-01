@@ -1,7 +1,5 @@
 package com.lijiawei.pro.boke.bean.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -44,7 +42,7 @@ public class ArticleVO {
     /**
      * 内容信息
      */
-    private String body;
+    private ContentVO body;
 
     /**
      * 作者信息
@@ -54,7 +52,7 @@ public class ArticleVO {
     /**
      * 类别信息
      */
-    private String categorys;
+    private CategoryVO category;
 
     /**
      * 数据创建时间

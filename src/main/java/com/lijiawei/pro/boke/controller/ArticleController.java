@@ -67,4 +67,16 @@ public class ArticleController {
         List<ArticleArchiveVO> archiveVOS = articleService.getArticleArchives();
         return Result.ok().data(archiveVOS);
     }
+
+    /**
+     *  文档详情功能
+     *      攻克困难 如何在业务方法里返回异常捏
+     * @param id
+     * @return
+     */
+    @PostMapping("/view/{id}")
+    public Result getArticleDetail(@PathVariable("id") Long id) {
+        Result result =  articleService.getArticleById(id);
+        return result;
+    }
 }

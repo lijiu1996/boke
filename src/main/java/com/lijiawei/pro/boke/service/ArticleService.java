@@ -1,5 +1,6 @@
 package com.lijiawei.pro.boke.service;
 
+import com.lijiawei.pro.boke.bean.Result;
 import com.lijiawei.pro.boke.bean.entity.Article;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lijiawei.pro.boke.bean.vo.ArticleArchiveVO;
@@ -21,4 +22,6 @@ public interface ArticleService extends IService<Article> {
     List<Article> getNewArticles(int limit);
 
     List<ArticleArchiveVO> getArticleArchives();
+
+    Result getArticleById(Long id);
 }

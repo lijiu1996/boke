@@ -3,14 +3,13 @@ package com.lijiawei.pro.boke.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.lijiawei.pro.boke.bean.Result;
 import com.lijiawei.pro.boke.bean.entity.Article;
 import com.lijiawei.pro.boke.bean.entity.User;
-import com.lijiawei.pro.boke.bean.vo.ArticleArchiveVO;
-import com.lijiawei.pro.boke.bean.vo.ArticleVO;
-import com.lijiawei.pro.boke.service.ArticleService;
+import com.lijiawei.pro.boke.bean.vo.*;
+import com.lijiawei.pro.boke.constant.ResultEnum;
 import com.lijiawei.pro.boke.mapper.ArticleMapper;
-import com.lijiawei.pro.boke.service.TagService;
-import com.lijiawei.pro.boke.service.UserService;
+import com.lijiawei.pro.boke.service.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -34,6 +33,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
     @Resource
     private UserService userService;
 
+    @Resource
+    private ArticleContentService articleContentService;
+
+    @Resource
+    private CategoryService categoryService;
+
     @Override
     public List<ArticleVO> getArticleByPage(int page, int pageSize) {
         Page<Article> pageRes = this.page(new Page<>(page, pageSize));
@@ -44,8 +49,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
             ArticleVO articleVO = new ArticleVO();
             BeanUtils.copyProperties(article,articleVO);
             User user = userService.getById(article.getAuthorId());
-            articleVO.setAuthor(user != null ? user.getUserAccount() : "未知");
-            articleVO.setCategorys(String.valueOf(article.getCategoryId()));
+            articleVO.setAuthor(user != null ? user.getUsername() : "未知");
+            articleVO.setCategory(null);
             articleVO.setTags(tagService.getTagListByArticleId(article.getId()));
             return articleVO;
         }).collect(Collectors.toList());
@@ -73,6 +78,25 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
     @Override
     public List<ArticleArchiveVO> getArticleArchives() {
         return baseMapper.getArticleArchives();
+    }
+
+    @Override
+    public Result getArticleById(Long id) {
+        Article article = getById(id);
+        if (article == null) {
+            return Result.fail(ResultEnum.NotFound).data("查询的文档id不在");
+        }
+        ArticleVO articleVO = new ArticleVO();
+        BeanUtils.copyProperties(article,articleVO);
+        List<TagVO> tagVO = tagService.getTagListByArticleId(id);
+        articleVO.setTags(tagVO);
+        User user = userService.getById(article.getAuthorId());
+        articleVO.setAuthor(user.getUsername());
+        CategoryVO categoryVO = categoryService.getVOById(article.getCategoryId());
+        articleVO.setCategory(categoryVO);
+        ContentVO contentVO = articleContentService.getVOById(article.getContentId());
+        articleVO.setBody(contentVO);
+        return Result.ok().data(articleVO);
     }
 }
 
