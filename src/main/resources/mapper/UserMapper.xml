@@ -27,4 +27,8 @@
         status,create_time,update_time,
         isdeleted
     </sql>
+
+    <select id="getAuthorById" resultType="com.lijiawei.pro.boke.bean.vo.AuthorVO">
+        select username as nickname, avatar, id from t_user where id = #{authorId}
+    </select>
 </mapper>

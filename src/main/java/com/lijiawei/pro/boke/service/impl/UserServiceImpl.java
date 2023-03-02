@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lijiawei.pro.boke.bean.entity.User;
 import com.lijiawei.pro.boke.bean.request.RegisterRequest;
+import com.lijiawei.pro.boke.bean.vo.AuthorVO;
 import com.lijiawei.pro.boke.bean.vo.UserVO;
 import com.lijiawei.pro.boke.mapper.UserMapper;
 import com.lijiawei.pro.boke.service.UserService;
@@ -40,6 +41,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         userVO.setNickname(user.getUsername());
         userVO.setAvatar(user.getAvatar());
         return userVO;
+    }
+
+    // 仅返回Author相关属性
+    @Override
+    public AuthorVO getAuthorById(Long authorId) {
+        return baseMapper.getAuthorById(authorId);
     }
 
     @Override

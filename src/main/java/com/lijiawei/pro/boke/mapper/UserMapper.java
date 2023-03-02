@@ -2,6 +2,8 @@ package com.lijiawei.pro.boke.mapper;
 
 import com.lijiawei.pro.boke.bean.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lijiawei.pro.boke.bean.vo.AuthorVO;
+import org.apache.ibatis.annotations.Param;
 
 /**
 * @author lijiawei
@@ -11,6 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface UserMapper extends BaseMapper<User> {
 
+    AuthorVO getAuthorById(@Param("authorId") Long authorId);
 }
 
 

@@ -3,6 +3,7 @@ package com.lijiawei.pro.boke.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lijiawei.pro.boke.bean.entity.User;
 import com.lijiawei.pro.boke.bean.request.RegisterRequest;
+import com.lijiawei.pro.boke.bean.vo.AuthorVO;
 import com.lijiawei.pro.boke.bean.vo.UserVO;
 
 /**
@@ -19,4 +20,6 @@ public interface UserService extends IService<User> {
     User getByAccount(String account);
 
     UserVO generateUserVO(User user);
+
+    AuthorVO getAuthorById(Long authorId);
 }
